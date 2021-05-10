@@ -20,25 +20,13 @@ class Contact {
   Contact(this.name, this.phone);
 }
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
+class HomeScreen extends StatelessWidget {
   final List<Contact> contacts = [
     Contact("Sushan Shakya", "989088098"),
     Contact("Someone", "1231"),
     Contact("Ram", "12312"),
     Contact("Hari", "876231"),
   ];
-
-  @override
-  void initState() {    
-    super.initState();
-    Dio()
-  }
 
   @override
   Widget build(BuildContext context) {
