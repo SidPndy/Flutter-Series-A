@@ -5,6 +5,7 @@ class AddContactForm extends StatelessWidget {
 
   final TextEditingController nameC = TextEditingController();
   final TextEditingController phoneC = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   AddContactForm({Key key, @required this.onAddPressed}) : super(key: key);
 
@@ -15,12 +16,17 @@ class AddContactForm extends StatelessWidget {
         title: Text("Add Contact"),
       ),
       body: Form(
+        key: formKey,
         child: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(15),
               child: TextFormField(
                 controller: nameC,
+                validator: (name) {
+                  if (name.isEmpty) return "Name Cannot be empty";
+                  return null;
+                },
                 decoration: InputDecoration(
                   labelText: "Name",
                   border: OutlineInputBorder(),
@@ -30,6 +36,10 @@ class AddContactForm extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(15),
               child: TextFormField(
+                validator: (phone) {
+                  if (phone.isEmpty) return "Phone Cannot be empty";
+                  return null;
+                },
                 controller: phoneC,
                 maxLength: 10,
                 keyboardType: TextInputType.number,
@@ -42,7 +52,8 @@ class AddContactForm extends StatelessWidget {
             FlatButton(
               color: Colors.green,
               onPressed: () {
-                onAddPressed(nameC.text, phoneC.text);
+                if (formKey.currentState.validate())
+                  onAddPressed(nameC.text, phoneC.text);
               },
               child: Text(
                 'Add',

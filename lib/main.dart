@@ -31,13 +31,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  List<Contact> contacts = [
-    Contact("Sushan Shakya", "989088098",
-        "https://reqres.in/img/faces/7-image.jpg"),
-    Contact("Someone", "1231", "https://reqres.in/img/faces/8-image.jpg"),
-    Contact("Ram", "12312", "https://reqres.in/img/faces/9-image.jpg"),
-    Contact("Hari", "876231", "https://reqres.in/img/faces/10-image.jpg"),
-  ];
+  List<Contact> contacts;
+
+  @override
+  void initState() {
+    super.initState();
+    contacts = [
+      Contact("Sushan Shakya", "989088098",
+          "https://reqres.in/img/faces/7-image.jpg"),
+      Contact("Someone", "1231", "https://reqres.in/img/faces/8-image.jpg"),
+      Contact("Ram", "12312", "https://reqres.in/img/faces/9-image.jpg"),
+      Contact("Hari", "876231", "https://reqres.in/img/faces/10-image.jpg"),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +56,19 @@ class HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(
               builder: (BuildContext ctx) => AddContactForm(
                 onAddPressed: (name, phone) {
-                  print("Add Pressedd");
-                  print(name);
-                  print(phone);
-                  Contact newContact = Contact(
+                  // print("Add Pressedd");
+                  // print(name);
+                  // print(phone);
+                  Navigator.pop(ctx);
+                  Contact contact = Contact(
                     name,
                     phone,
                     "https://reqres.in/img/faces/11-image.jpg",
                   );
+                  contacts.add(contact);
 
-                  contacts.add(newContact);
-                  Navigator.pop(ctx);
+                  setState(() {});
+                  // print("Add Pressedd");
                 },
               ),
             ),
